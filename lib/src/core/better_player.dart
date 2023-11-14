@@ -119,15 +119,15 @@ class _BetterPlayerState extends State<BetterPlayer>
     super.dispose();
   }
 
-  // @override
-  // void didUpdateWidget(BetterPlayer oldWidget) {
-  //   if (oldWidget.controller != widget.controller) {
-  //     _controllerEventSubscription?.cancel();
-  //     _controllerEventSubscription =
-  //         widget.controller.controllerEventStream.listen(onControllerEvent);
-  //   }
-  //   super.didUpdateWidget(oldWidget);
-  // }
+  @override
+  void didUpdateWidget(BetterPlayer oldWidget) {
+    if (oldWidget.controller != widget.controller) {
+      _controllerEventSubscription?.cancel();
+      _controllerEventSubscription =
+          oldWidget.controller.controllerEventStream.listen(onControllerEvent);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   void onControllerEvent(BetterPlayerControllerEvent event) {
     switch (event) {
@@ -201,6 +201,7 @@ class _BetterPlayerState extends State<BetterPlayer>
     Animation<double> secondaryAnimation,
   ) {
     widget.controller.pause();
+
     final controllerProvider = BetterPlayerControllerProvider(
         controller: widget.controller, child: _buildPlayer());
 
