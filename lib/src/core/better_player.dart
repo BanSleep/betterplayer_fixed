@@ -3,6 +3,7 @@ import 'package:better_player/better_player.dart';
 import 'package:better_player/src/configuration/better_player_controller_event.dart';
 import 'package:better_player/src/core/better_player_utils.dart';
 import 'package:better_player/src/core/better_player_with_controls.dart';
+import 'package:better_player/src/video_player/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -198,6 +199,7 @@ class _BetterPlayerState extends State<BetterPlayer>
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
+    widget.controller.pause();
     final controllerProvider = BetterPlayerControllerProvider(
         controller: widget.controller, child: _buildPlayer());
 
