@@ -120,11 +120,12 @@ class _BetterPlayerState extends State<BetterPlayer>
   }
 
   @override
-  void didUpdateWidget(BetterPlayer oldWidget) {
+  void didUpdateWidget(BetterPlayer oldWidget) async {
     if (oldWidget.controller != widget.controller) {
+      widget.controller.videoPlayerController?.seekTo(await oldWidget.controller.videoPlayerController?.position);
       _controllerEventSubscription?.cancel();
       _controllerEventSubscription =
-          oldWidget.controller.controllerEventStream.listen(onControllerEvent);
+          widget.controller.controllerEventStream.listen(onControllerEvent);
     }
     super.didUpdateWidget(oldWidget);
   }
